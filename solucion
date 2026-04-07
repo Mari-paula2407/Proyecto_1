@@ -1,0 +1,119 @@
+NutriUTP - Sistema de Gestión de Cafetería
+
+Descripción
+
+**NutriUTP** es un sistema diseñado para la cafetería de la Universidad Tecnológica de Pereira, cuyo objetivo es gestionar la entrega de almuerzos diarios, aplicar subsidios estudiantiles y procesar ventas de forma desacoplada y escalable.
+
+Este proyecto implementa principios de ingeniería de software enfocados en el **desacoplamiento y manejo de dependencias**, permitiendo que el sistema sea fácil de mantener y evolucionar.
+
+---
+
+Objetivos del Proyecto
+
+* Gestionar un menú dinámico diario
+* Procesar subsidios según perfil del estudiante
+* Generar tiquetes de venta
+* Mantener bajo acoplamiento entre componentes
+* Aplicar buenas prácticas de diseño (SRP, encapsulamiento, inyección de dependencias)
+
+---
+
+Arquitectura del Sistema
+
+El sistema está dividido en módulos según responsabilidades:
+
+```
+NutriUTP/
+│
+├── modelos/
+│   ├── plato.py
+│   ├── menu_dia.py
+│   └── comensal.py
+│
+├── servicios/
+│   ├── procesador_venta.py
+│   └── servicio_pago.py
+│
+├── reportes/
+│   └── generador_reportes.py
+│
+├── main.py
+└── README.md
+```
+
+---
+
+Principios de Diseño Aplicados
+
+SRP (Single Responsibility Principle)
+
+Cada clase tiene una única responsabilidad:
+
+* `Plato`: información del plato
+* `MenuDia`: gestión del menú
+* `Comensal`: cálculo de subsidios
+* `ProcesadorVenta`: lógica de venta
+* `GeneradorReportes`: generación de reportes
+
+---
+
+ Encapsulamiento
+
+Uso de atributos privados (`_precio_base`, `_opciones`)
+Acceso controlado mediante métodos
+
+---
+Inyección de Dependencias
+
+El `ProcesadorVenta` recibe el `ServicioPago` como dependencia externa:
+
+```python
+procesador = ProcesadorVenta(servicio_pago)
+```
+
+Esto permite cambiar el sistema de pagos sin afectar el resto del código.
+
+
+
+ Bajo Acoplamiento
+
+Las clases interactúan mediante **interfaces simples (métodos)**, no por implementación interna.
+
+
+ Funcionalidades
+
+Gestión de Menú
+
+Creación de menú diario
+Opción estándar y vegetariana
+Consulta de platos disponibles
+
+Subsidios
+
+Cálculo de descuentos según perfil:
+
+  Alto
+  Medio
+  Bajo
+
+ Ventas
+
+ Generación de tiquetes
+ Validación de pago (simulada)
+
+Reportes
+
+Total recaudado
+Cantidad de ventas
+Posibles Mejoras
+Persistencia con base de datos
+Interfaz gráfica o web
+API REST
+Pruebas unitarias
+Información Académica
+Asignatura: Programación 4
+Docente: Alejandro Rodas Vásquez
+Universidad: Universidad Tecnológica de Pereira
+Fecha: 13 de marzo de 2026
+Autor
+Maria Paula Patiño Carrillo
